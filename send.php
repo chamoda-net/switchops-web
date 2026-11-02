@@ -207,6 +207,14 @@ if ($name === '' || $email === '' || $message === '') {
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(false, 'Please enter a valid email address.', 422);
 }
+// The domain must exist and be able to receive mail. Stops spam bots using made-up
+// lookalike domains (e.g. "search-switchops.tech"), whose confirmations would bounce
+// and harm the mailbox's sending reputation.
+$emailDomain = rtrim(substr(strrchr($email, '@'), 1), '.') . '.';
+if (!checkdnsrr($emailDomain, 'MX') && !checkdnsrr($emailDomain, 'A') && !checkdnsrr($emailDomain, 'AAAA')) {
+    log_event('blocked:bad-domain');
+    respond(false, 'That email address does not look reachable. Please check it, or email us directly at ' . TO_EMAIL . '.', 422);
+}
 if (($_POST['consent'] ?? '') !== 'yes') {
     respond(false, 'Please confirm that you agree to the Terms and Conditions and Privacy Policy.', 422);
 }
