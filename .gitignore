@@ -1,0 +1,11 @@
+# Real SMTP credentials: never commit. Copy the .example file and fill it in on the server.
+hostinger-private/switchops-mail-config.php
+*.log
+
+# Build output
+switchops-site-upload.zip
+tools/dist/
+node_modules/
+
+# Original AI-generated source images (large, not used by the site)
+Gemini_Generated_Image_*.jpg

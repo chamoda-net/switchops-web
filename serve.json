@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/ops/userguide", "destination": "/ops-userguide.html" }]
+}

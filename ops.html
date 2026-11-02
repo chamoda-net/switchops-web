@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwitchOps AI | On-Premises AI Network Management Platform</title>
+<meta name="description" content="SwitchOps AI is an on-premises network management platform that diagnoses faults, forecasts capacity, and makes every configuration change reversible.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://switchops.tech/ops">
+<meta name="theme-color" content="#080808">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwitchOps Tech">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="SwitchOps AI | On-Premises AI Network Management Platform">
+<meta property="og:description" content="SwitchOps AI is an on-premises network management platform that diagnoses faults, forecasts capacity, and makes every configuration change reversible.">
+<meta property="og:url" content="https://switchops.tech/ops">
+<meta property="og:image" content="https://switchops.tech/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SwitchOps Tech: infrastructure, cloud, and software, built to work as one.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SwitchOps AI | On-Premises AI Network Management Platform">
+<meta name="twitter:description" content="SwitchOps AI is an on-premises network management platform that diagnoses faults, forecasts capacity, and makes every configuration change reversible.">
+<meta name="twitter:image" content="https://switchops.tech/img/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://switchops.tech/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "SwitchOps AI",
+          "item": "https://switchops.tech/ops"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "SwitchOps AI",
+      "url": "https://switchops.tech/ops",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Network management",
+      "description": "SwitchOps AI is an on-premises network management platform that diagnoses faults, forecasts capacity, and makes every configuration change reversible.",
+      "publisher": {
+        "@id": "https://switchops.tech/#organization"
+      },
+      "operatingSystem": "Linux",
+      "image": "https://switchops.tech/img/product/dashboard.webp",
+      "screenshot": [
+        "https://switchops.tech/img/product/dashboard.webp",
+        "https://switchops.tech/img/product/licence.webp",
+        "https://switchops.tech/img/product/login.webp"
+      ],
+      "featureList": [
+        "Device discovery and live topology",
+        "Monitoring of health, interfaces, bandwidth, PoE, optics and IP usage",
+        "AI-assisted root-cause diagnosis",
+        "7-day and 30-day capacity forecasts",
+        "Guided configuration with restore points and rollback",
+        "Role-based access with audit history",
+        "Local AI and Cloud AI editions with offline licensing"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://switchops.tech/ops#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is SwitchOps AI designed for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For teams that run their own network and want faster fault diagnosis, early warning on capacity, and safe configuration changes, without handing their data to someone else."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which network hardware does it support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cisco IOS and IOS-XE routers and switches, including stacks. Wireless monitoring is available as an add-on. More vendors are on the roadmap."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need deep technical expertise to use it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Most tasks use guided forms and templates. CLI access is still available when you want it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which AI does it use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Local AI edition runs an AI model on your own server. The Cloud AI edition connects to the provider you choose."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it depend on an internet connection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not with the Local AI edition, including licence activation. The Cloud AI edition needs internet access only for AI requests."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do I need to run it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "One Ubuntu Server 22.04 or 24.04 LTS machine on your network, physical or virtual. The Local AI edition needs at least 4 CPU cores and 8 GB of RAM; the Cloud AI edition needs 2 cores and 4 GB. Our team handles deployment and onboarding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does it compare to global NMS vendors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We don't try to out-feature the global vendors. We focus on running inside your boundary, working offline, and support from local engineers."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preload" href="assets/fonts/rajdhani-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/russo-one-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/img/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="image" href="img/hero/network-operations-centre-1920.webp" media="(min-width: 761px)" fetchpriority="high">
+<link rel="preload" as="image" href="img/hero/network-operations-centre-960.webp" media="(max-width: 760px)" fetchpriority="high">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-mark">
+      <img src="img/logo-mark.svg" alt="">
+      <svg class="preloader-ring" viewBox="0 0 72 72">
+        <circle class="track" cx="36" cy="36" r="33"></circle>
+        <circle class="fill" cx="36" cy="36" r="33"></circle>
+      </svg>
+    </div>
+    <div class="preloader-log">
+      <span class="preloader-line" data-line="0">booting switchops-tech...</span>
+      <span class="preloader-line" data-line="1">initializing network intelligence...</span>
+      <span class="preloader-line" data-line="2">systems operational <span class="ok">✓</span></span>
+    </div>
+    <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
+  </div>
+</div>
+<script>if(sessionStorage.getItem("switchops-booted")){document.getElementById("preloader").className="done instant";}</script>
+<canvas id="grain"></canvas>
+
+<header class="site">
+  <div class="container nav">
+    <a class="logo" href="/" aria-label="SwitchOps Tech home"><img class="logo-img" src="img/logo-white.svg" alt="SwitchOps Tech" width="110" height="48"></a>
+    <nav class="links" aria-label="Primary">
+      <a class="nav-link" href="/network-infrastructure">Network &amp; Infrastructure</a>
+      <a class="nav-link" href="/cloud-solutions">Cloud</a>
+      <a class="nav-link active" href="/ops" aria-current="page"><span class="nav-dot" aria-hidden="true"></span>SwitchOps AI</a>
+      <a class="nav-link" href="/about">About</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="/contact" class="btn btn-primary">Get in touch</a>
+    </div>
+    <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <nav aria-label="Mobile">
+      <div class="m-label">Services</div>
+      <a class="m-link" href="/network-infrastructure" style="--i:1"><span class="m-num">01</span>Network &amp; Infrastructure</a>
+      <a class="m-link" href="/cloud-solutions" style="--i:2"><span class="m-num">02</span>Cloud Solutions</a>
+      <a class="m-link" href="/ops" aria-current="page" style="--i:3"><span class="m-num">03</span>SwitchOps AI</a>
+      <div class="m-label">Company</div>
+      <a class="m-link" href="/about" style="--i:4"><span class="m-num">04</span>About</a>
+      <a class="m-link" href="/contact" style="--i:5"><span class="m-num">05</span>Contact</a>
+    </nav>
+    <div class="m-foot">
+      <a href="/contact" class="btn btn-primary">Get in touch →</a>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-photo" style="--hero:url('/img/hero/network-operations-centre-1920.webp');--hero-sm:url('/img/hero/network-operations-centre-960.webp')"></div>
+  <div class="hero-beams"></div>
+  <div class="container">
+    <div class="crumb"><a href="/">Home</a> / SwitchOps AI</div>
+    <h1>Network intelligence <span class="dim2">you own.</span></h1>
+    <p class="lead">SwitchOps AI finds the root cause of network faults, warns you about capacity problems before users feel them, and makes every configuration change reversible. It runs on your own infrastructure, and with the Local AI edition, your network data never leaves your premises.</p>
+    <div class="btn-row" style="margin-top:32px;">
+      <a href="/contact?interest=SwitchOps%20AI%20demo" class="btn btn-primary">Book a demo</a>
+      <a href="#how-it-works" class="btn btn-outline">See how it works</a>
+    </div>
+  </div>
+</section>
+
+<section class="proof-strip" aria-label="Key facts">
+  <div class="container">
+    <ul class="proof">
+      <li><strong>On-premises</strong><span>Runs on your own server</span></li>
+      <li><strong>Air-gap ready</strong><span>No internet required with Local AI</span></li>
+      <li><strong>Reversible changes</strong><span>Restore points for every push</span></li>
+      <li><strong>No-CLI configuration</strong><span>Guided templates for common tasks</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="switchops-ai">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Platform</div>
+      <h2>One platform for the whole network lifecycle. <span class="dim2">Discover, monitor, diagnose, configure.</span></h2>
+    </div>
+    <div class="platform-grid reveal-stagger">
+      <div class="card platform-card">
+        <div class="platform-top"><div class="icon" data-icon="discover"></div><span class="platform-num">01</span></div>
+        <h3>Discover &amp; inventory</h3>
+        <p>Add a device and SwitchOps AI verifies access, prepares it for monitoring and maps its neighbours on a live topology view.</p>
+      </div>
+      <div class="card platform-card">
+        <div class="platform-top"><div class="icon" data-icon="monitor"></div><span class="platform-num">02</span></div>
+        <h3>Monitor</h3>
+        <p>Device health, interfaces, bandwidth, PoE, optics and IP address usage in one place, with alert thresholds you control and live device logs.</p>
+      </div>
+      <div class="card platform-card">
+        <div class="platform-top"><div class="icon" data-icon="diagnose"></div><span class="platform-num">03</span></div>
+        <h3>Detect &amp; diagnose</h3>
+        <p>Incidents open automatically. One click gathers the evidence and returns a clear root cause with recommended next steps.</p>
+      </div>
+      <div class="card platform-card">
+        <div class="platform-top"><div class="icon" data-icon="forecast"></div><span class="platform-num">04</span></div>
+        <h3>Forecast</h3>
+        <p>See where device resources and link utilisation are heading over the next 7 and 30 days.</p>
+      </div>
+      <div class="card platform-card">
+        <div class="platform-top"><div class="icon" data-icon="configure"></div><span class="platform-num">05</span></div>
+        <h3>Configure &amp; roll back</h3>
+        <p>Make changes through guided forms, with a restore point taken before every change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="product-tour" style="border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Product tour</div>
+      <h2>The real interface, <span class="dim2">not a mock-up.</span></h2>
+      <p>Screens from SwitchOps AI running on its own server.</p>
+    </div>
+    <div class="tour" data-tour>
+      <div class="tour-tabs" role="tablist" aria-label="Product screens">
+        <button class="tour-tab active" role="tab" aria-selected="true" aria-controls="tour-dashboard" id="tt-dashboard" data-shot="dashboard">Dashboard &amp; Smart Insights</button>
+        <button class="tour-tab" role="tab" aria-selected="false" aria-controls="tour-licence" id="tt-licence" data-shot="licence" tabindex="-1">Licence &amp; system info</button>
+        <button class="tour-tab" role="tab" aria-selected="false" aria-controls="tour-login" id="tt-login" data-shot="login" tabindex="-1">Secure sign-in</button>
+      </div>
+      <div class="tour-frame">
+        <div class="tour-bar" aria-hidden="true"><span></span><span></span><span></span><em>switchops-ai.local</em></div>
+        <figure class="tour-shot active" id="tour-dashboard" role="tabpanel" aria-labelledby="tt-dashboard">
+          <img src="img/product/dashboard.webp" alt="SwitchOps AI dashboard showing server health and AI-derived Smart Insights" width="1913" height="858" loading="lazy">
+          <figcaption>Server health at a glance, with AI-derived Smart Insights that explain what needs attention and why.</figcaption>
+        </figure>
+        <figure class="tour-shot" id="tour-licence" role="tabpanel" aria-labelledby="tt-licence" hidden>
+          <img src="img/product/licence.webp" alt="SwitchOps AI system information page showing licence tier, edition and managed device count" width="1918" height="847" loading="lazy">
+          <figcaption>Licence, edition and managed-device count, visible to administrators on the server itself.</figcaption>
+        </figure>
+        <figure class="tour-shot" id="tour-login" role="tabpanel" aria-labelledby="tt-login" hidden>
+          <img src="img/product/login.webp" alt="SwitchOps AI sign-in screen" width="1198" height="660" loading="lazy">
+          <figcaption>Every user signs in with their own account and role.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="solutions" style="background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Solutions</div>
+      <h2>Every fault a senior engineer would chase for hours. <span class="dim2">SwitchOps AI starts with the evidence.</span></h2>
+    </div>
+
+    <div class="tabs-widget">
+      <div class="tabs-head">
+        <button class="tab-btn active" data-tab="diagnose">Diagnose a Fault</button>
+        <button class="tab-btn" data-tab="forecast">Forecast Capacity</button>
+        <button class="tab-btn" data-tab="audit">Configure &amp; Roll Back</button>
+      </div>
+
+      <div class="tab-panel active" data-tab="diagnose">
+        <div>
+          <h3>Root cause, with the evidence attached.</h3>
+          <p>When an incident opens, SwitchOps AI collects what an experienced engineer would check: recent alerts, device health history and live diagnostic output. It then explains the most likely cause, the evidence behind it, and how to fix it.</p>
+          <ul>
+            <li>Root cause, contributing factors and step-by-step remediation</li>
+            <li>A confidence score that reflects the evidence available</li>
+            <li>Read-only diagnostics: nothing on the device is changed</li>
+          </ul>
+          <a href="/contact?interest=SwitchOps%20AI%20demo" class="btn btn-primary">Book a demo</a>
+        </div>
+        <div class="mock-app">
+          <div class="mock-topbar">
+            <span>INC-000081 <span class="badge-inc">P1</span> <span class="badge-active">Active</span></span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-row"><span>Interface</span><span>GigabitEthernet1/0/11</span></div>
+            <div class="mock-row"><span>Status</span><span style="color:var(--danger);">Down</span></div>
+            <div class="mock-row"><span>Root cause</span><span>Physical layer error</span></div>
+            <div class="mock-bar-track"><div class="mock-bar-fill" style="width:91%;"></div></div>
+            <div class="mock-row"><span>Confidence</span><span class="mock-highlight" data-count="91" data-suffix="%">91%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tab="forecast">
+        <div>
+          <h3>See the problem before it happens.</h3>
+          <p>SwitchOps AI tracks device resources and link utilisation over time and shows where they are heading, so you can plan upgrades before users notice slowdowns.</p>
+          <ul>
+            <li>7-day and 30-day outlook per device</li>
+            <li>Bandwidth outlook per interface</li>
+            <li>Network-wide insights on the dashboard</li>
+          </ul>
+          <a href="/contact?interest=SwitchOps%20AI%20demo" class="btn btn-primary">Book a demo</a>
+        </div>
+        <div class="mock-app">
+          <div class="mock-topbar"><span>Health forecast <span class="badge-active">Live</span></span></div>
+          <div class="mock-body">
+            <div class="mock-row"><span>access-sw-12</span><span style="color:var(--warn);">Rising</span></div>
+            <div class="mock-bar-track"><div class="mock-bar-fill" style="width:78%; background:var(--warn);"></div></div>
+            <div class="mock-row"><span>core-sw-01</span><span class="ok">Stable</span></div>
+            <div class="mock-bar-track"><div class="mock-bar-fill" style="width:34%; background:var(--success);"></div></div>
+            <div class="mock-row"><span>Devices scanned</span><span>47 · 2 flagged</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tab="audit">
+        <div>
+          <h3>Every change has a way back.</h3>
+          <p>Before any change reaches a device, SwitchOps AI saves a secure restore point. If the restore point can't be saved, the change doesn't go ahead. Roll back to an earlier state and review exactly what will happen before you confirm.</p>
+          <ul>
+            <li>Warns you before a change that can't be undone</li>
+            <li>You decide whether a change is saved permanently</li>
+            <li>Prevents two people changing the same device at once</li>
+            <li>Full history of who changed what, and when</li>
+          </ul>
+          <a href="/contact?interest=SwitchOps%20AI%20demo" class="btn btn-primary">Book a demo</a>
+        </div>
+        <div class="mock-app">
+          <div class="mock-topbar"><span>config-push <span class="badge-active">Success</span></span></div>
+          <div class="mock-body">
+            <div class="mock-row"><span>core-sw</span><span class="ok">3 restore points</span></div>
+            <div class="mock-row"><span>Role</span><span>Network Engineer</span></div>
+            <div class="mock-row"><span>Rollback</span><span class="mock-highlight">Preview ready</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-head center">
+      <div class="eyebrow">How it works</div>
+      <h2>Three steps. <span class="dim2">Then it keeps watching.</span></h2>
+    </div>
+    <div class="grid grid-3 reveal-stagger">
+      <div class="card video-card">
+        <div class="num">1</div>
+        <div class="video-thumb" data-yt-id="CrukOr58p1o" style="background-image:url('https://img.youtube.com/vi/CrukOr58p1o/hqdefault.jpg');">
+          <button class="play-btn" aria-label="Play: Add your devices">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <h3>Add your devices</h3>
+        <p>SwitchOps AI verifies access, prepares each device for monitoring and maps your topology.</p>
+      </div>
+
+      <div class="card video-card">
+        <div class="num">2</div>
+        <div class="video-thumb" data-yt-id="Uu3NUH7EhkY" style="background-image:url('https://img.youtube.com/vi/Uu3NUH7EhkY/hqdefault.jpg');">
+          <button class="play-btn" aria-label="Play: Let it watch">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <h3>Let it watch</h3>
+        <p>Alerts and incidents are raised automatically. Diagnose any of them in one click.</p>
+      </div>
+
+      <div class="card video-card">
+        <div class="num">3</div>
+        <div class="video-thumb" data-yt-id="VzXakyNQ0AE" style="background-image:url('https://img.youtube.com/vi/VzXakyNQ0AE/hqdefault.jpg');">
+          <button class="play-btn" aria-label="Play: Change safely">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <h3>Change safely</h3>
+        <p>Push VLAN, interface and security settings from guided templates, with a restore point before every change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Features</div>
+      <h2>Built by network engineers, <span class="dim2">for network engineers.</span></h2>
+    </div>
+    <div class="feature-grid reveal-stagger">
+      <div class="feature">
+        <div class="icon" data-icon="network"></div>
+        <div><h3>Topology view</h3><p>A live map of how your devices connect</p></div>
+      </div>
+      <div class="feature">
+        <div class="icon" data-icon="ipam"></div>
+        <div><h3>IP address management</h3><p>Who is using which address, and pool usage</p></div>
+      </div>
+      <div class="feature">
+        <div class="icon" data-icon="poe"></div>
+        <div><h3>PoE monitoring</h3><p>Power budget and per-port usage</p></div>
+      </div>
+      <div class="feature">
+        <div class="icon" data-icon="optics"></div>
+        <div><h3>Optics monitoring</h3><p>Transceiver health at a glance</p></div>
+      </div>
+      <div class="feature">
+        <div class="icon" data-icon="bandwidth"></div>
+        <div><h3>Bandwidth</h3><p>Live and historical interface traffic</p></div>
+      </div>
+      <div class="feature">
+        <div class="icon" data-icon="logs"></div>
+        <div><h3>Live logs</h3><p>Device logs collected centrally</p></div>
+      </div>
+      <div class="feature">
+        <div class="icon" data-icon="terminal"></div>
+        <div><h3>Browser terminal</h3><p>Device CLI access from the web interface</p></div>
+      </div>
+      <div class="feature">
+        <div class="icon" data-icon="template"></div>
+        <div><h3>Configuration templates</h3><p>Ready-made templates for routing, switching and security</p></div>
+      </div>
+      <div class="feature">
+        <div class="icon" data-icon="backup"></div>
+        <div><h3>Backups</h3><p>Device configuration and platform backups</p></div>
+      </div>
+      <div class="feature">
+        <div class="icon" data-icon="id-card"></div>
+        <div><h3>Role-based access</h3><p>Separate Super Admin, Network Engineer, Operator and Read-only roles</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Security</div>
+      <h2>Verified, <span class="dim2">not assumed.</span></h2>
+    </div>
+    <div class="security-grid reveal">
+      <div class="security-cell">
+        <div class="s-icon" data-icon="key"></div>
+        <h4>Role-based access</h4>
+        <p>Every user has a defined role. Only authorised engineers can change or roll back configuration, and key actions are recorded in an audit log.</p>
+      </div>
+      <div class="security-cell">
+        <div class="s-icon" data-icon="lock"></div>
+        <h4>Protected at rest</h4>
+        <p>Device credentials and configuration backups are stored encrypted on your server.</p>
+      </div>
+      <div class="security-cell">
+        <div class="s-icon" data-icon="history"></div>
+        <h4>Controlled change</h4>
+        <p>No change is applied without a restore point, and risky changes are flagged before they run.</p>
+      </div>
+      <div class="security-cell">
+        <div class="s-icon" data-icon="shield-check"></div>
+        <h4>Your boundary</h4>
+        <p>SwitchOps AI runs inside your network. With the Local AI edition, no network data leaves your premises.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">AI editions</div>
+      <h2>Choose where the AI runs.</h2>
+    </div>
+    <div class="editions reveal-stagger">
+      <div class="edition is-local">
+        <h3>Local AI edition</h3>
+        <dl>
+          <div><dt>AI engine</dt><dd>Runs on your own server</dd></div>
+          <div><dt>Network data leaves your premises</dt><dd>Never</dd></div>
+          <div><dt>Internet required</dt><dd>No</dd></div>
+          <div><dt>Best for</dt><dd>Government, telecom and secure sites</dd></div>
+        </dl>
+      </div>
+      <div class="edition">
+        <h3>Cloud AI edition</h3>
+        <dl>
+          <div><dt>AI engine</dt><dd>A leading cloud AI provider of your choice</dd></div>
+          <div><dt>Network data leaves your premises</dt><dd>Only the context needed to diagnose an incident</dd></div>
+          <div><dt>Internet required</dt><dd>Yes, for AI requests</dd></div>
+          <div><dt>Best for</dt><dd>Organisations that want the fastest answers</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="editions-note">Supported cloud providers: Anthropic Claude, Google Gemini, OpenAI and DeepSeek.</p>
+    <p class="legal-inline">How cloud AI requests are handled is set out in our <a href="/terms#t-11">Terms and Conditions</a> and <a href="/privacy#p-5">Privacy Policy</a>.</p>
+    <p class="trademark-note">Built with Llama. All trademarks belong to their respective owners.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="licensing reveal">
+      <div>
+        <div class="eyebrow">Licensing</div>
+        <h2>Licensed per device. <span class="dim2">Ready for secure sites.</span></h2>
+      </div>
+      <div>
+        <p>Plans scale from small offices to large enterprise networks, with terms from three months to five years. Licences activate offline, so SwitchOps AI works in fully isolated environments.</p>
+        <div class="btn-row"><a href="/contact" class="btn btn-primary">Request a quote</a><a href="/ops/userguide#plans-and-features" class="btn btn-outline">Compare plans</a></div>
+        <p class="legal-inline">Licences are issued under the <a href="/terms">SwitchOps AI Terms and Conditions</a>. Read our <a href="/privacy">Privacy Policy</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="user-guide" style="border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="docs-band">
+      <div class="docs-intro reveal">
+        <div class="eyebrow">Documentation</div>
+        <h2>The user guide. <span class="dim2">Everything from install to troubleshooting.</span></h2>
+        <p>Server requirements, the install wizard, first sign-in, every screen, licensing and fixes for common problems, in one searchable guide you can also save as a PDF.</p>
+        <div class="btn-row"><a href="/ops/userguide" class="btn btn-primary">Open the user guide</a></div>
+        <p class="docs-meta">Version 1.0 · 19 chapters</p>
+      </div>
+      <ul class="docs-links reveal-stagger">
+        <li class="reveal"><a href="/ops/userguide#before-you-install"><span class="icon" data-icon="clipboard-check"></span><span class="docs-text"><strong>Before you install</strong><span>Server, firewall ports and device requirements</span></span><span class="docs-arrow" aria-hidden="true">→</span></a></li>
+        <li class="reveal"><a href="/ops/userguide#installing-switchops-ai"><span class="icon" data-icon="terminal"></span><span class="docs-text"><strong>Installing SwitchOps AI</strong><span>A guided wizard, usually 5 to 15 minutes</span></span><span class="docs-arrow" aria-hidden="true">→</span></a></li>
+        <li class="reveal"><a href="/ops/userguide#users-and-roles"><span class="icon" data-icon="id-card"></span><span class="docs-text"><strong>Users and roles</strong><span>Four roles, from Super Admin to Read Only</span></span><span class="docs-arrow" aria-hidden="true">→</span></a></li>
+        <li class="reveal"><a href="/ops/userguide#cloud-ai-and-your-data"><span class="icon" data-icon="shield-check"></span><span class="docs-text"><strong>Cloud AI and your data</strong><span>What is masked, and what is never sent</span></span><span class="docs-arrow" aria-hidden="true">→</span></a></li>
+        <li class="reveal"><a href="/ops/userguide#plans-and-features"><span class="icon" data-icon="layout"></span><span class="docs-text"><strong>Plans and features</strong><span>Basic, Pro and Trial, with Local AI or Cloud AI</span></span><span class="docs-arrow" aria-hidden="true">→</span></a></li>
+        <li class="reveal"><a href="/ops/userguide#troubleshooting"><span class="icon" data-icon="tool"></span><span class="docs-text"><strong>Troubleshooting</strong><span>What to check when something does not work</span></span><span class="docs-arrow" aria-hidden="true">→</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">FAQ</div>
+      <h2>Before you deploy. <span class="dim2">Everything you need to know.</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-q">What is SwitchOps AI designed for? <span class="plus">+</span></button>
+        <div class="faq-a"><p>For teams that run their own network and want faster fault diagnosis, early warning on capacity, and safe configuration changes, without handing their data to someone else.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Which network hardware does it support? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Cisco IOS and IOS-XE routers and switches, including stacks. Wireless monitoring is available as an add-on. More vendors are on the roadmap.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need deep technical expertise to use it? <span class="plus">+</span></button>
+        <div class="faq-a"><p>No. Most tasks use guided forms and templates. CLI access is still available when you want it.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Which AI does it use? <span class="plus">+</span></button>
+        <div class="faq-a"><p>The Local AI edition runs an AI model on your own server. The Cloud AI edition connects to the provider you choose.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Does it depend on an internet connection? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Not with the Local AI edition, including licence activation. The Cloud AI edition needs internet access only for AI requests.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What do I need to run it? <span class="plus">+</span></button>
+        <div class="faq-a"><p>One Ubuntu Server 22.04 or 24.04 LTS machine on your network, physical or virtual. The Local AI edition needs at least 4 CPU cores and 8 GB of RAM; the Cloud AI edition needs 2 cores and 4 GB. Our team handles deployment and onboarding. <a href="/ops/userguide#before-you-install">See the full requirements</a>.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How does it compare to global NMS vendors? <span class="plus">+</span></button>
+        <div class="faq-a"><p>We don't try to out-feature the global vendors. We focus on running inside your boundary, working offline, and support from local engineers.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="custom-sw">
+  <div class="container split">
+    <div>
+      <div class="eyebrow">Software &amp; Development</div>
+      <h2>Custom software, <span class="dim2">built by the same team.</span></h2>
+    </div>
+    <div>
+      <p>The engineers behind SwitchOps AI also design and build custom web applications, client portals and integrations that connect your software to your network and hosting. Smart HR and Smart Auditor are next in our product pipeline.</p>
+      <a href="/contact" class="btn btn-outline">Discuss a software project →</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="cta-band reveal">
+      <div class="eyebrow" style="justify-content:center;">Get started</div>
+      <h2>Your network won't diagnose itself. <span class="dim2">SwitchOps AI will.</span></h2>
+      <p>See it on your own network. We'll arrange a guided proof of concept.</p>
+      <div class="btn-row"><a href="/contact?interest=SwitchOps%20AI%20demo" class="btn btn-primary">Book a demo</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="/" style="margin-bottom:18px;" aria-label="SwitchOps Tech home"><img class="logo-img" src="img/logo-white.svg" alt="SwitchOps Tech" width="110" height="48"></a>
+        <p style="max-width:280px;">Network infrastructure, cloud solutions, and AI-driven software, engineered in Sri Lanka.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/network-infrastructure">Network &amp; Infrastructure</a></li>
+          <li><a href="/cloud-solutions">Cloud Solutions</a></li>
+          <li><a href="/ops">SwitchOps AI</a></li>
+          <li><a href="/ops/userguide">SwitchOps AI user guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="https://traininghub.lk" target="_blank" rel="noopener">traininghub.lk</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/terms">Terms and Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul><li><a href="mailto:contact@switchops.tech">contact@switchops.tech</a></li><li>No. 36, Byrde Place,<br>Colombo 06, Sri Lanka</li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SwitchOps Tech (Pvt) Ltd. All rights reserved.</span>
+      <div class="socials">
+        <a href="https://www.linkedin.com/company/switchops-tech/" class="s-linkedin" target="_blank" rel="noopener me" aria-label="SwitchOps Tech on LinkedIn"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg></a>
+        <a href="https://www.facebook.com/switchops.tech/" class="s-facebook" target="_blank" rel="noopener me" aria-label="SwitchOps Tech on Facebook"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/></svg></a>
+        <a href="https://www.youtube.com/@switchopstech" class="s-youtube" target="_blank" rel="noopener me" aria-label="SwitchOps Tech on YouTube"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/icons.js"></script>
+<script src="assets/vendors.js"></script>
+<script src="assets/script.js"></script>
+</body>
+</html>

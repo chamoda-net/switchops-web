@@ -1,0 +1,13 @@
+{
+  "name": "switchops-web-tools",
+  "private": true,
+  "description": "Build scripts for switchops.tech: the user guide page and the Hostinger upload zip.",
+  "scripts": {
+    "guide": "node build-userguide.js",
+    "build": "node build-deploy.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2",
+    "marked": "^14.1.4"
+  }
+}

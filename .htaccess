@@ -1,0 +1,64 @@
+# SwitchOps Tech: server rules for Hostinger
+
+# One canonical address: always HTTPS, always the bare domain (no www).
+DirectoryIndex index.html
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://switchops.tech%{REQUEST_URI} [L,R=301]
+
+# The product page moved; keep old links and search results working.
+RewriteRule ^software-development(\.html)?/?$ /ops [R=301,L]
+
+# SwitchOps AI user guide: lives at /ops/userguide (file: ops-userguide.html).
+RewriteCond %{THE_REQUEST} \s/+ops-userguide(\.html)?[\s?] [NC]
+RewriteRule ^ /ops/userguide [R=301,L]
+RewriteRule ^ops/userguide$ ops-userguide.html [L]
+
+# Clean URLs. Visitors and search engines see /about, never /about.html.
+# 1) /index or /index.html -> /
+RewriteCond %{THE_REQUEST} \s/+index(\.html)?[\s?] [NC]
+RewriteRule ^ / [R=301,L]
+# 2) /page.html -> /page (THE_REQUEST = what the browser asked for, so the
+#    internal rewrite in step 4 can never loop back into this redirect)
+RewriteCond %{THE_REQUEST} \s/+([^\s?]+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+# 3) /page/ -> /page (no trailing slash on pages)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+# 4) Serve /page from page.html behind the scenes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# Branded "page not found" page.
+ErrorDocument 404 /404.html
+
+# Compress text assets.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/xml image/svg+xml
+</IfModule>
+
+# Browser caching: pages always revalidate. CSS/JS are versioned (?v=hash) by the
+# deployment build and fonts never change, so those are cached for a year. Images
+# are not versioned, so they stay at 30 days (a replaced image still shows up).
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+AddType font/woff2 .woff2
+AddType application/manifest+json .webmanifest
+AddType image/x-icon .ico
