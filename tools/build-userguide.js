@@ -213,7 +213,7 @@ const ld = {
       inLanguage: 'en', version, datePublished: TODAY, dateModified: TODAY, wordCount: words,
       image: 'https://switchops.tech/img/product/dashboard.webp',
       author: { '@id': 'https://switchops.tech/#organization' }, publisher: { '@id': 'https://switchops.tech/#organization' },
-      about: { '@type': 'SoftwareApplication', name: 'SwitchOps AI', url: 'https://switchops.tech/ops', applicationCategory: 'BusinessApplication', operatingSystem: 'Ubuntu Server 22.04 LTS, 24.04 LTS' },
+      about: { '@type': 'SoftwareApplication', name: 'SwitchOps AI', url: 'https://switchops.tech/ops', applicationCategory: 'BusinessApplication', operatingSystem: 'Ubuntu Server 24.04 LTS' },
       hasPart: docChapters.map((c) => ({ '@type': 'WebPageElement', name: c.title, url: `${URL}#${c.id}` })) },
   ],
 };

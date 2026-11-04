@@ -58,9 +58,9 @@
       "url": "https://switchops.tech/ops/userguide",
       "inLanguage": "en",
       "version": "1.0",
-      "datePublished": "2026-11-01",
-      "dateModified": "2026-11-01",
-      "wordCount": 5539,
+      "datePublished": "2026-11-04",
+      "dateModified": "2026-11-04",
+      "wordCount": 5802,
       "image": "https://switchops.tech/img/product/dashboard.webp",
       "author": {
         "@id": "https://switchops.tech/#organization"
@@ -73,7 +73,7 @@
         "name": "SwitchOps AI",
         "url": "https://switchops.tech/ops",
         "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Ubuntu Server 22.04 LTS, 24.04 LTS"
+        "operatingSystem": "Ubuntu Server 24.04 LTS"
       },
       "hasPart": [
         {
@@ -309,30 +309,40 @@
 <tbody>
 <tr><th scope="row" data-label="Item"><strong>Installer</strong> (<code>.run</code> file)</th><td data-label="What it is">A single self-contained file. It needs no internet access, so it works on isolated and air-gapped networks.</td></tr>
 <tr><th scope="row" data-label="Item"><strong>Licence file</strong> (<code>.lic</code>)</th><td data-label="What it is">Your licence, tied to your server. You get it after you send us your server&#39;s fingerprint (<a class="g-ref" href="#s-2-3">see 2.3</a>).</td></tr>
+<tr><th scope="row" data-label="Item"><strong>Checksum file</strong> (<code>.sha256</code>)</th><td data-label="What it is">Sent with the installer. Check it before you install (<a class="g-ref" href="#s-2-1">see 2.1</a>). It confirms the file arrived complete and unchanged.</td></tr>
 </tbody></table></div></div>
 <p>There are separate installers for each AI edition. Make sure you have the one that matches your licence:</p>
 
 <div class="g-table"><div class="g-table-scroll" tabindex="0"><table>
 <thead><tr><th scope="col">Installer</th><th scope="col">Edition</th><th scope="col">Approx. size</th></tr></thead>
 <tbody>
-<tr><th scope="row" data-label="Installer"><code>switchops-&lt;version&gt;-local-3b.run</code></th><td data-label="Edition">Local AI, standard model</td><td data-label="Approx. size">2.7 GB</td></tr>
-<tr><th scope="row" data-label="Installer"><code>switchops-&lt;version&gt;-local-8b.run</code></th><td data-label="Edition">Local AI, larger model (needs more RAM, GPU recommended)</td><td data-label="Approx. size">5.5 GB</td></tr>
-<tr><th scope="row" data-label="Installer"><code>switchops-&lt;version&gt;-cloud.run</code></th><td data-label="Edition">Cloud AI</td><td data-label="Approx. size">450 MB</td></tr>
+<tr><th scope="row" data-label="Installer"><code>switchops-&lt;version&gt;-ubuntu24.04-local-3b.run</code></th><td data-label="Edition">Local AI</td><td data-label="Approx. size">2.2 GB</td></tr>
+<tr><th scope="row" data-label="Installer"><code>switchops-&lt;version&gt;-ubuntu24.04-cloud.run</code></th><td data-label="Edition">Cloud AI</td><td data-label="Approx. size">240 MB</td></tr>
 </tbody></table></div></div>
+<p>Each installer is built for one Ubuntu release and one AI edition. It will not install on a different Ubuntu release, and it will not accept a licence for the other edition.</p>
+
 <p>The installer checks this for you. A Local licence will not install from the Cloud installer, and the other way round.</p>
 
 <h3 id="s-1-2"><span class="g-h3-num">1.2</span>Server requirements</h3>
 <div class="g-table"><div class="g-table-scroll" tabindex="0"><table>
 <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col">Local AI edition</th><th scope="col">Cloud AI edition</th></tr></thead>
 <tbody>
-<tr><th scope="row">Operating system</th><td data-label="Local AI edition">Ubuntu Server 22.04 LTS or 24.04 LTS (64-bit)</td><td data-label="Cloud AI edition">Same</td></tr>
-<tr><th scope="row">CPU</th><td data-label="Local AI edition">4 cores minimum, 8 recommended</td><td data-label="Cloud AI edition">2 cores minimum, 4 recommended</td></tr>
+<tr><th scope="row">Operating system</th><td data-label="Local AI edition">Ubuntu Server 24.04 LTS (any 24.04.x release), x86_64 (amd64)</td><td data-label="Cloud AI edition">Same</td></tr>
+<tr><th scope="row">CPU</th><td data-label="Local AI edition">4 cores minimum, 8 recommended. <strong>Must support AVX2.</strong></td><td data-label="Cloud AI edition">2 cores minimum, 4 recommended</td></tr>
 <tr><th scope="row">RAM</th><td data-label="Local AI edition">8 GB minimum, 16 GB recommended</td><td data-label="Cloud AI edition">4 GB minimum, 8 GB recommended</td></tr>
-<tr><th scope="row">Free disk on <code>/opt</code></th><td data-label="Local AI edition">20 GB (30 GB for the 8b model)</td><td data-label="Cloud AI edition">20 GB</td></tr>
-<tr><th scope="row">GPU</th><td data-label="Local AI edition">Optional. Speeds up AI analysis a lot.</td><td data-label="Cloud AI edition">Not needed</td></tr>
+<tr><th scope="row">Disk</th><td data-label="Local AI edition">40 GB minimum, 100 GB recommended (SSD)</td><td data-label="Cloud AI edition">20 GB minimum, 40 GB recommended</td></tr>
+<tr><th scope="row">GPU</th><td data-label="Local AI edition">Not needed. AI runs on the CPU.</td><td data-label="Cloud AI edition">Not needed</td></tr>
 <tr><th scope="row">Internet</th><td data-label="Local AI edition">Not needed</td><td data-label="Cloud AI edition">Outbound HTTPS to your chosen AI provider</td></tr>
+<tr><th scope="row">Devices</th><td data-label="Local AI edition">Minimum spec: up to about 50. Recommended spec: up to 100.</td><td data-label="Cloud AI edition">Same</td></tr>
 </tbody></table></div></div>
-<p>A virtual machine is fine (VMware, Proxmox, Hyper-V and similar).</p>
+<p>A virtual machine is fine (VMware, Proxmox, Hyper-V and similar). For the Local AI edition:</p>
+
+<ul class="g-list">
+<li>Set the VM&#39;s CPU type to pass the host CPU through (on Proxmox, CPU type <strong>host</strong>). Otherwise AVX2 can be hidden from the VM, and the AI becomes very slow.</li>
+<li>Give the VM a fixed memory reservation, not ballooning or dynamic memory.</li>
+</ul>
+
+<p>Not supported: Ubuntu Desktop, other Ubuntu releases (including 22.04), ARM servers, Debian, RHEL and its derivatives, Windows and macOS.</p>
 
 <h3 id="s-1-3"><span class="g-h3-num">1.3</span>Prepare the server first</h3>
 <p>Do these <strong>before</strong> you run the installer. The installer deliberately does not change the server&#39;s network settings, because doing that over an SSH session can cut you off halfway through.</p>
@@ -351,6 +361,7 @@
 <thead><tr><th scope="col">From</th><th scope="col">To</th><th scope="col">Port</th><th scope="col">Why</th></tr></thead>
 <tbody>
 <tr><th scope="row" data-label="From">Your users&#39; browsers</th><td data-label="To">SwitchOps server</td><td data-label="Port">TCP 443 (HTTPS), TCP 80 (redirects to HTTPS)</td><td data-label="Why">Web interface</td></tr>
+<tr><th scope="row" data-label="From">Your users&#39; browsers</th><td data-label="To">SwitchOps server</td><td data-label="Port">TCP 8000</td><td data-label="Why">Direct access to SwitchOps. Used if HTTPS setup fails during install. Can be closed later in Settings.</td></tr>
 <tr><th scope="row" data-label="From">SwitchOps server</th><td data-label="To">Network devices</td><td data-label="Port">ICMP</td><td data-label="Why">Reachability checks</td></tr>
 <tr><th scope="row" data-label="From">SwitchOps server</th><td data-label="To">Network devices</td><td data-label="Port">TCP 22 (SSH)</td><td data-label="Why">Discovery, polling, configuration push, SSH terminal</td></tr>
 <tr><th scope="row" data-label="From">SwitchOps server</th><td data-label="To">Network devices</td><td data-label="Port">UDP 161 (SNMPv3)</td><td data-label="Why">Monitoring and traffic statistics</td></tr>
@@ -385,23 +396,33 @@
 <h3 id="s-2-1"><span class="g-h3-num">2.1</span>Copy the installer to the server</h3>
 <p>From your workstation (example using <code>scp</code>):</p>
 
-<div class="g-code"><div class="g-code-bar"><span>bash</span><button class="g-copy" type="button" aria-label="Copy commands">Copy</button></div><pre><code>scp switchops-1.0.0-local-3b.run youruser@10.0.0.50:/home/youruser/</code></pre></div>
+<div class="g-code"><div class="g-code-bar"><span>bash</span><button class="g-copy" type="button" aria-label="Copy commands">Copy</button></div><pre><code>scp switchops-1.0.0-ubuntu24.04-local-3b.run switchops-1.0.0-ubuntu24.04-local-3b.run.sha256 youruser@10.0.0.50:/home/youruser/</code></pre></div>
 
 <p>Copy your licence file too if you already have it:</p>
 
 <div class="g-code"><div class="g-code-bar"><span>bash</span><button class="g-copy" type="button" aria-label="Copy commands">Copy</button></div><pre><code>scp switchops.lic youruser@10.0.0.50:/home/youruser/</code></pre></div>
 
+<p>On the server, check the file before you run it. Keep the <code>.run</code> and <code>.sha256</code> files in the same folder:</p>
+
+<div class="g-code"><div class="g-code-bar"><span>bash</span><button class="g-copy" type="button" aria-label="Copy commands">Copy</button></div><pre><code>cd ~
+sha256sum -c switchops-1.0.0-ubuntu24.04-local-3b.run.sha256</code></pre></div>
+
+<p>It should print <code>OK</code>. If it doesn&#39;t, copy the installer again.</p>
+
 <h3 id="s-2-2"><span class="g-h3-num">2.2</span>Run the installer</h3>
 <p>On the server:</p>
 
 <div class="g-code"><div class="g-code-bar"><span>bash</span><button class="g-copy" type="button" aria-label="Copy commands">Copy</button></div><pre><code>cd ~
-chmod +x switchops-1.0.0-local-3b.run
-sudo ./switchops-1.0.0-local-3b.run</code></pre></div>
+chmod +x switchops-1.0.0-ubuntu24.04-local-3b.run
+sudo ./switchops-1.0.0-ubuntu24.04-local-3b.run</code></pre></div>
 
 <p>The wizard opens in the terminal. Use <strong>Tab</strong> and the <strong>arrow keys</strong> to move, <strong>Enter</strong> to select.</p>
 
 <h3 id="s-2-3"><span class="g-h3-num">2.3</span>Step by step</h3>
-<ol class="g-steps"><li class="g-step"><span class="g-step-num" aria-hidden="true">1</span><div class="g-step-body"><h4>Prerequisites</h4><p>The installer checks the Ubuntu version, RAM and free disk. If something is below the recommendation it tells you what and asks whether to continue.</p></div></li>
+<ol class="g-steps"><li class="g-step"><span class="g-step-num" aria-hidden="true">1</span><div class="g-step-body"><h4>Prerequisites</h4><p>The installer checks the Ubuntu release, RAM and free disk.</p><ul class="g-list">
+<li><strong>Wrong Ubuntu release or a non-amd64 server:</strong> the installer stops and tells you which release it was built for. Use the installer that matches your server.</li>
+<li><strong>RAM or disk below the recommendation:</strong> it tells you what is short and asks whether to continue.</li>
+</ul></div></li>
 <li class="g-step"><span class="g-step-num" aria-hidden="true">2</span><div class="g-step-body"><h4>Licence</h4><p>This comes first, so a licence problem shows up in seconds rather than after a full install.</p><ul class="g-list">
 <li>The screen shows this server&#39;s <strong>machine fingerprint</strong> (a 64-character code).</li>
 <li><strong>No licence yet?</strong> Copy the fingerprint, press <strong>Cancel</strong>, and send the fingerprint to <a href="mailto:contact@switchops.tech">contact@switchops.tech</a> or your SwitchOps representative. We send back your <code>.lic</code> file. Then run the installer again.</li>
@@ -988,6 +1009,7 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 <tbody>
 <tr><th scope="row" data-label="Problem"><strong>Installer says the licence is not for this machine</strong></th><td data-label="What to check">The server&#39;s fingerprint changed (OS reinstall, new network card, new hardware). Send the fingerprint shown on screen to support for a reissued licence.</td></tr>
 <tr><th scope="row" data-label="Problem"><strong>Installer says the licence is for the other edition</strong></th><td data-label="What to check">You have the Local installer with a Cloud licence or the other way round. Ask us for the matching installer.</td></tr>
+<tr><th scope="row" data-label="Problem"><strong>Installer says it is for a different Ubuntu release</strong></th><td data-label="What to check">The installer is built for one Ubuntu release (it is in the file name). Install on Ubuntu Server 24.04 LTS, or ask us for the matching installer.</td></tr>
 <tr><th scope="row" data-label="Problem"><strong>Web page does not open</strong></th><td data-label="What to check"><code>sudo systemctl status switchops-backend</code>. Check TCP 443/80 is open to the server. Try <code>http://&lt;server-ip&gt;:8000</code>.</td></tr>
 <tr><th scope="row" data-label="Problem"><strong>Browser certificate warning</strong></th><td data-label="What to check">Expected with the self-signed certificate. Upload your own in Settings → Network → HTTP/HTTPS.</td></tr>
 <tr><th scope="row" data-label="Problem"><strong>Discovery stops at SSH Connect</strong></th><td data-label="What to check">Check the SSH credential, that SSH is enabled on the device, and that TCP 22 is allowed from the server.</td></tr>
