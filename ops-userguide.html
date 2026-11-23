@@ -58,9 +58,9 @@
       "url": "https://switchops.tech/ops/userguide",
       "inLanguage": "en",
       "version": "1.0",
-      "datePublished": "2026-11-04",
-      "dateModified": "2026-11-04",
-      "wordCount": 5802,
+      "datePublished": "2026-11-21",
+      "dateModified": "2026-11-21",
+      "wordCount": 6581,
       "image": "https://switchops.tech/img/product/dashboard.webp",
       "author": {
         "@id": "https://switchops.tech/#organization"
@@ -240,11 +240,11 @@
   <div class="container">
     <div class="crumb"><a href="/">Home</a> / <a href="/ops">SwitchOps AI</a> / User guide</div>
     <h1>SwitchOps AI <span class="dim2">User Guide</span></h1>
-    <p class="lead">SwitchOps AI is an on-premise network management platform for Cisco routers and switches. It discovers your devices, keeps an accurate inventory, monitors health and traffic, raises incidents with AI root-cause analysis, and pushes configuration safely with checkpoints you can roll back to. Everything runs on your own server.</p>
+    <p class="lead">SwitchOps AI is an on-premise network management platform for Cisco routers and switches and Huawei switches. It discovers your devices, keeps an accurate inventory, monitors health and traffic, raises incidents with AI root-cause analysis, and pushes configuration safely with checkpoints you can roll back to. Everything runs on your own server.</p>
     <div class="legal-meta">
       <span><b>Version</b>1.0</span>
       <span><b>Chapters</b>19</span>
-      <span><b>Supports</b>Cisco IOS and IOS-XE</span>
+      <span><b>Supports</b>Cisco IOS, IOS-XE and Huawei VRP</span>
     </div>
   </div>
 </section>
@@ -373,17 +373,40 @@
 <p>The Local AI edition makes <strong>no</strong> outbound internet connections. If you use email alerts, the only extra opening it needs is to your own mail relay.</p>
 
 <h3 id="s-1-5"><span class="g-h3-num">1.5</span>Device requirements</h3>
-<p>SwitchOps AI version 1.0 supports <strong>Cisco IOS and IOS-XE routers and switches</strong> (including stacks).</p>
+<p>SwitchOps AI version 1.0 supports:</p>
+
+<div class="g-table g-two"><div class="g-table-scroll" tabindex="0"><table>
+<thead><tr><th scope="col">Vendor</th><th scope="col">Platforms</th></tr></thead>
+<tbody>
+<tr><th scope="row" data-label="Vendor">Cisco</th><td data-label="Platforms">IOS and IOS-XE routers and switches, including stacks</td></tr>
+<tr><th scope="row" data-label="Vendor">Huawei</th><td data-label="Platforms">S-series switches running VRP V200R0xx</td></tr>
+</tbody></table></div></div>
+<p>SwitchOps detects the vendor automatically when it first logs in, so you add Cisco and Huawei devices the same way.</p>
 
 <p>Each device needs:</p>
 
 <ul class="g-list">
 <li>A management IP address reachable from the SwitchOps server</li>
 <li>SSH enabled</li>
-<li>A local user (or AAA account) with privilege level 15, or a user plus an enable secret</li>
+<li>A login with full rights: on Cisco, a local user (or AAA account) with privilege level 15, or a user plus an enable secret; on Huawei, a local user with privilege level 15 and service type SSH</li>
+<li>On Huawei, at least two free VTY lines. SwitchOps can use up to two SSH sessions to a device at the same time.</li>
 </ul>
 
-<p>You do <strong>not</strong> need to configure SNMP or syslog on the devices yourself. During discovery SwitchOps sets up SNMPv3 and points the device&#39;s syslog at the SwitchOps server for you, using the SNMPv3 credential you choose.</p>
+<p>A minimal Huawei setup looks like this (replace the user name and password):</p>
+
+<div class="g-code"><div class="g-code-bar"><span>huawei</span><button class="g-copy" type="button" aria-label="Copy commands">Copy</button></div><pre><code>stelnet server enable
+aaa
+ local-user switchops password irreversible-cipher &lt;password&gt;
+ local-user switchops privilege level 15
+ local-user switchops service-type ssh
+ quit
+ssh user switchops authentication-type password
+ssh user switchops service-type stelnet
+user-interface vty 0 4
+ authentication-mode aaa
+ quit</code></pre></div>
+
+<p>You do not need to configure SNMP or syslog on the devices yourself. During discovery SwitchOps sets up SNMPv3 and points the device&#39;s syslog at the SwitchOps server for you, using the SNMPv3 credential you choose. This works the same on Cisco and Huawei.</p>
 
 
 
@@ -559,7 +582,7 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 <tr><th scope="row" data-label="State"><strong>No SSH</strong></th><td data-label="Meaning">Answered ping, but SSH login failed.</td></tr>
 <tr><th scope="row" data-label="State"><strong>Discovering</strong></th><td data-label="Meaning">Discovery is running now.</td></tr>
 </tbody></table></div></div>
-<p>A separate <strong>Reachability</strong> column shows live status: Up, Down, Recovery, Unstable or Unknown.</p>
+<p>A separate <strong>Reachability</strong> column shows live status: Up, Down, Recovery, Unstable or Unknown. SwitchOps pings every device once a minute in the background, so reachability stays current on the dashboard even when nobody has Live Ping open. A device is marked Down after two missed checks in a row, which opens a Device Unreachable incident; it closes on its own when the device answers again.</p>
 
 <h3 id="s-6-2"><span class="g-h3-num">6.2</span>Discover a device</h3>
 <ol class="g-ol">
@@ -578,6 +601,8 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 <tr><th scope="row" data-label="Step">Verify SNMPv3</th><td data-label="What happens">Confirms SNMP works</td></tr>
 <tr><th scope="row" data-label="Step">Data Poll</th><td data-label="What happens">Collects model, serial, versions, uptime, interfaces and more</td></tr>
 </tbody></table></div></div>
+<p>On a Huawei switch the steps are the same. SwitchOps uses the matching Huawei commands for syslog and SNMPv3.</p>
+
 <p>When every step passes the device becomes <strong>Managed</strong>.</p>
 
 <p>You can also add devices you do not manage (for example a firewall or a provider&#39;s router) as <strong>non-managed devices</strong>, so your inventory is complete. They can be discovered later.</p>
@@ -611,9 +636,11 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 <tr><th scope="row" data-label="Tab"><strong>VLAN Info</strong></th><td data-label="What it shows">The device&#39;s VLANs and which ports use them</td></tr>
 <tr><th scope="row" data-label="Tab"><strong>MAC / ARP</strong></th><td data-label="What it shows">MAC address table and ARP table, searchable</td></tr>
 <tr><th scope="row" data-label="Tab"><strong>SFP Modules</strong> <span class="g-pill">Pro</span></th><td data-label="What it shows">Optics on this device with signal levels</td></tr>
-<tr><th scope="row" data-label="Tab"><strong>Neighbours</strong></th><td data-label="What it shows">Directly connected devices learned from CDP/LLDP</td></tr>
+<tr><th scope="row" data-label="Tab"><strong>Neighbours</strong></th><td data-label="What it shows">Directly connected devices learned from CDP or LLDP (Huawei uses LLDP)</td></tr>
 <tr><th scope="row" data-label="Tab"><strong>SSH Terminal</strong></th><td data-label="What it shows">A live SSH session in the browser (Network Engineer and Super Admin)</td></tr>
 </tbody></table></div></div>
+<p>On Huawei switches, ports with no link type set (shown as <code>auto</code> on the switch) negotiate their mode. Unless a neighbour negotiates a trunk they carry untagged traffic in their default VLAN, so the Interfaces tab shows them as Access in that VLAN. Trunk ports show their allowed VLANs and native VLAN, on every vendor.</p>
+
 <p>Use <strong>Poll Device</strong> to refresh the data immediately.</p>
 
 <h3 id="s-7-1"><span class="g-h3-num">7.1</span>Interface configuration</h3>
@@ -629,6 +656,15 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 <tr><th scope="row" data-label="Option"><strong>Set list</strong></th><td data-label="What it does">Replaces the whole allowed list. Default when you turn a port into a new trunk. On an existing trunk it shows you the current list and the new one before you confirm.</td></tr>
 </tbody></table></div></div>
 <p>Enter VLANs as <code>60,70,80</code> or ranges like <code>100-110</code>. Invalid entries are rejected before anything is sent. If you add a VLAN that does not exist on the switch yet, you get a warning.</p>
+
+<p>On Huawei switches the same editor sends Huawei commands. Two things work differently from Cisco:</p>
+
+<ul class="g-list">
+<li>A new Huawei trunk carries only VLAN 1 until you list more. Always fill in the VLANs a new trunk needs.</li>
+<li>Huawei adds VLANs to a trunk rather than replacing the list, so <strong>Set list</strong> first clears the allowed list and then sets the new one.</li>
+</ul>
+
+<p>Custom interface templates work on both vendors. A few settings have no Huawei equivalent (Disable DTP, Storm Control Action, ARP Inspection Trust and Disable CDP); the preview marks them as left out and they are not sent.</p>
 
 
 
@@ -745,6 +781,8 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 
 <p>Configuration push is available to Network Engineers and Super Admins, for routers and switches.</p>
 
+<p>If you manage more than one vendor, a <strong>vendor switch</strong> at the top of the Configuration page picks Cisco or Huawei. Everything below follows it: the device list, the templates, the CLI preview, push and rollback. One push never mixes vendors, so the preview is exactly what each device receives. SwitchOps remembers the last vendor you picked.</p>
+
 <h3 id="s-11-1"><span class="g-h3-num">11.1</span>Ready-made templates</h3>
 <p>Fill in a form, preview the exact CLI, then push. Included templates:</p>
 
@@ -757,6 +795,22 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 <tr><th scope="row" data-label="Area">Stability</th><td data-label="Templates">Resource Thresholds, Fault &amp; Memory Reserves</td></tr>
 <tr><th scope="row" data-label="Area">Advanced <span class="g-pill">Pro</span></th><td data-label="Templates">Policy Map / QoS, OSPF Routing, EIGRP Routing, UDLD Configuration</td></tr>
 </tbody></table></div></div>
+<p>For Huawei, the templates send Huawei commands. Some Cisco templates have no Huawei version and are hidden when Huawei is selected: Policy Map / QoS, EIGRP Routing, Fault &amp; Memory Reserves, Config Archive Logging and Disable CDP. UDLD Configuration sets up DLDP, the Huawei equivalent.</p>
+
+<p>Huawei also has its own templates:</p>
+
+<div class="g-table g-two"><div class="g-table-scroll" tabindex="0"><table>
+<thead><tr><th scope="col">Template</th><th scope="col">What it does</th></tr></thead>
+<tbody>
+<tr><th scope="row" data-label="Template">Interface VLAN</th><td data-label="What it does">Sets a port to access or trunk with its VLANs</td></tr>
+<tr><th scope="row" data-label="Template">Loopback Detection</th><td data-label="What it does">Finds loops behind an access port and blocks or shuts the port</td></tr>
+<tr><th scope="row" data-label="Template">Port Isolation</th><td data-label="What it does">Stops user ports talking to each other while they still reach the uplink</td></tr>
+<tr><th scope="row" data-label="Template">ARP Protection</th><td data-label="What it does">Protects the gateway from ARP spoofing and limits ARP floods</td></tr>
+<tr><th scope="row" data-label="Template">MAC Limits &amp; Flapping</th><td data-label="What it does">Limits MAC addresses on a port and can shut it when MACs flap</td></tr>
+<tr><th scope="row" data-label="Template">Auto-Config Off</th><td data-label="What it does">Stops a reset switch pulling a configuration from the network</td></tr>
+</tbody></table></div></div>
+<p>Templates that change management access (SSH Security, Line Hardening, VTY Access Control, SNMP Access-List and AAA) can lock you out if a value is wrong. Try them on a test switch first, or keep console access ready.</p>
+
 <p>Interface configuration cards cover common port settings. Pro plans can also create <strong>custom interface templates</strong>.</p>
 
 <h3 id="s-11-2"><span class="g-h3-num">11.2</span>How a push works</h3>
@@ -771,7 +825,7 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 <li><strong>Sequential:</strong> one device at a time, safer. Can stop at the first failure.</li>
 <li><strong>Bulk:</strong> all devices at once, quicker.</li>
 </ul></li>
-<li>Choose whether to <strong>Save to startup-config</strong>. Unticked (default) changes the running configuration only, so a reload brings back the saved config. Ticked saves at the end, after all templates.</li>
+<li>Choose whether to <strong>Save to startup-config</strong>. Unticked (default) changes the running configuration only, so a reload brings back the saved config. Ticked saves at the end, after all templates. On Huawei this runs the save command.</li>
 <li>Start the push and follow the <strong>Push Log</strong> live.</li>
 </ol>
 
@@ -783,10 +837,11 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 <li>Each device keeps its last <strong>10 checkpoints</strong></li>
 <li>From <strong>Push History</strong> you can roll a device back to any checkpoint. SwitchOps works out the difference and pushes only what is needed, and tells you what will happen before you confirm</li>
 <li>Rollback is available to Network Engineers and Super Admins</li>
+<li>Rollback works the same on Huawei. SwitchOps works out the Huawei undo commands, including multi-line banners</li>
 </ul>
 
 <h3 id="s-11-4"><span class="g-h3-num">11.4</span>Push History</h3>
-<p>Every push is recorded: who pushed, when, what was pushed, to which devices (or which location), and the result per device.</p>
+<p>Every push is recorded: who pushed, when, what was pushed, to which devices (or which location), the vendor, and the result per device. Passwords and keys in templates (local users, SNMPv3, NTP keys, AAA shared keys) are hidden in the CLI preview and stored as <code>&lt;hidden&gt;</code> in Push History; the device still receives the real value.</p>
 
 
 
@@ -933,7 +988,7 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 
 <p>Every request to the cloud AI provider goes through a privacy filter on your server first.</p>
 
-<p><strong>Never sent:</strong> passwords and secrets, enable secrets, SNMP community strings and SNMPv3 keys, TACACS/RADIUS and routing keys, pre-shared keys, certificates, serial numbers and email addresses.</p>
+<p><strong>Never sent:</strong> passwords and secrets, enable secrets, SNMP community strings and SNMPv3 keys, TACACS/RADIUS and routing keys, pre-shared keys, certificates, serial numbers (including Huawei ESNs) and email addresses. Huawei encrypted password values are removed too.</p>
 
 <p><strong>Masked before sending, restored in the answer:</strong> IPv4 and IPv6 addresses, MAC addresses and domain names. The AI can still reason about subnets and gateways, and your engineers see the real addresses in SwitchOps.</p>
 
@@ -1014,6 +1069,8 @@ sudo cat /var/log/switchops-install.log        <span class="g-cmt"># installer l
 <tr><th scope="row" data-label="Problem"><strong>Browser certificate warning</strong></th><td data-label="What to check">Expected with the self-signed certificate. Upload your own in Settings → Network → HTTP/HTTPS.</td></tr>
 <tr><th scope="row" data-label="Problem"><strong>Discovery stops at SSH Connect</strong></th><td data-label="What to check">Check the SSH credential, that SSH is enabled on the device, and that TCP 22 is allowed from the server.</td></tr>
 <tr><th scope="row" data-label="Problem"><strong>Discovery stops at Reverse Ping or Verify SNMPv3</strong></th><td data-label="What to check">Check the device can reach the SwitchOps server, and that UDP 161 is allowed between them.</td></tr>
+<tr><th scope="row" data-label="Problem"><strong>Discovery stops at SSH Connect on a Huawei switch</strong></th><td data-label="What to check">Check <code>stelnet server enable</code>, that the user has service type SSH and privilege level 15, and that free VTY lines are left (SwitchOps uses up to two sessions). A Huawei switch can take up to 30 seconds to accept an SSH login; SwitchOps waits for it.</td></tr>
+<tr><th scope="row" data-label="Problem"><strong>A Huawei push reports &quot;Unrecognized command&quot; or &quot;Wrong parameter&quot;</strong></th><td data-label="What to check">The templates use S-series VRP V200 commands. Older or different Huawei platforms may not accept every line. Roll back from Push History and tell us the model and software version.</td></tr>
 <tr><th scope="row" data-label="Problem"><strong>No incidents appear from a device</strong></th><td data-label="What to check">Check UDP 5140 from the device to the SwitchOps server is allowed.</td></tr>
 <tr><th scope="row" data-label="Problem"><strong>&quot;Available in SwitchOps Pro&quot; on a screen</strong></th><td data-label="What to check">That feature is part of the Pro plans. Contact us to upgrade.</td></tr>
 <tr><th scope="row" data-label="Problem"><strong>Changes are blocked, monitoring still works</strong></th><td data-label="What to check">The licence has expired or is invalid. Check Settings → System Info and install a new licence. Also check the server clock and NTP.</td></tr>
@@ -1059,7 +1116,7 @@ sudo cat /var/log/switchops-install.log</code></pre></div>
         <div><strong>Still stuck?</strong><p>Our engineers answer every support email. Include your licence ID and SwitchOps version.</p></div>
         <div class="btn-row"><a class="btn btn-primary" href="mailto:contact@switchops.tech">Email support</a><a class="btn btn-outline" href="/contact?interest=SwitchOps%20AI%20demo">Book a demo</a></div>
       </div>
-      <p class="g-legal">© 2026 SwitchOps Tech (Pvt) Ltd. All rights reserved. SwitchOps AI is licensed software, used under the terms of your licence agreement. Cisco, IOS and IOS-XE are trademarks of Cisco Systems, Inc.</p>
+      <p class="g-legal">© 2026 SwitchOps Tech (Pvt) Ltd. All rights reserved. SwitchOps AI is licensed software, used under the terms of your licence agreement. Cisco, IOS and IOS-XE are trademarks of Cisco Systems, Inc. Huawei and VRP are trademarks of Huawei Technologies Co., Ltd.</p>
     </article>
   </div>
 </section>

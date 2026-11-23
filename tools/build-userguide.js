@@ -263,7 +263,7 @@ ${top}
     <div class="legal-meta">
       <span><b>Version</b>${esc(version)}</span>
       <span><b>Chapters</b>${docChapters.length}</span>
-      <span><b>Supports</b>Cisco IOS and IOS-XE</span>
+      <span><b>Supports</b>Cisco IOS, IOS-XE and Huawei VRP</span>
     </div>
   </div>
 </section>

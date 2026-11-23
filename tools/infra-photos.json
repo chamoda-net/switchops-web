@@ -1,0 +1,33 @@
+{
+  "note": "Photos on /network-infrastructure. Source: https://www.pexels.com/photo/<id>/ (Pexels licence, free for commercial use). Used as illustrations, not as photos of SwitchOps Tech projects.",
+  "photos": {
+    "wifi-office": 6326260,
+    "network-switch": 2881232,
+    "cabling-panel": 4716292,
+    "cabling-engineer": 442151,
+    "cctv-camera": 13422379,
+    "cctv-indoor": 24783389,
+    "access-reader": 37538043,
+    "smart-panel": 16423104,
+    "smart-lock": 6689288,
+    "smart-climate": 36077581,
+    "elv-lan": 13963756,
+    "elv-phone": 7580825,
+    "elv-pa": 27577330,
+    "elv-iptv": 6394550,
+    "elv-fire": 20614571,
+    "elv-bms": 30641386,
+    "av-boardroom": 6949383,
+    "av-meeting": 236730,
+    "video-call": 7643794,
+    "av-classroom": 7742832,
+    "av-auditorium": 36286297,
+    "av-led": 4218028,
+    "place-shop": 13119975,
+    "place-office": 8117421,
+    "place-school": 10638069,
+    "place-hotel": 14036253,
+    "place-warehouse": 4487363,
+    "place-home": 6588583
+  }
+}

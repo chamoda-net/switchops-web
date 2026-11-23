@@ -623,6 +623,76 @@ document.addEventListener('DOMContentLoaded', () => {
     if (printBtn) printBtn.addEventListener('click', () => window.print());
   }
 
+  // Network & Infrastructure: photo pins light up with their list item, the jump links
+  // follow the section on screen, and the audio visual rooms become tabs (all rooms
+  // stay visible when JavaScript is off).
+  document.querySelectorAll('.sol-grid, .av-panel').forEach((group) => {
+    group.querySelectorAll('[data-pin]').forEach((el) => {
+      const mark = (on) => group.querySelectorAll('.pin[data-pin="' + el.dataset.pin + '"]').forEach((p) => p.classList.toggle('on', on));
+      el.addEventListener('pointerenter', () => mark(true));
+      el.addEventListener('pointerleave', () => mark(false));
+    });
+  });
+
+  const solNav = document.querySelector('.sol-nav');
+  if (solNav && 'IntersectionObserver' in window) {
+    const bar = solNav.querySelector('ul');
+    const solLinks = new Map(Array.from(solNav.querySelectorAll('a')).map((a) => [a.getAttribute('href').slice(1), a]));
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        const link = solLinks.get(e.target.id);
+        link.classList.toggle('active', e.isIntersecting);
+        if (e.isIntersecting) bar.scrollTo({ left: link.offsetLeft - bar.offsetLeft - 24, behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    }, { rootMargin: '-30% 0px -69% 0px' });
+    solLinks.forEach((a, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+  }
+
+  const av = document.querySelector('[data-av]');
+  if (av) {
+    const list = av.querySelector('.av-tabs');
+    const tabs = Array.from(av.querySelectorAll('.av-tab'));
+    const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')));
+    const select = (i, animate) => tabs.forEach((t, n) => {
+      const on = n === i;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      panels[n].hidden = !on;
+      panels[n].classList.toggle('enter', on && animate);
+    });
+    av.classList.add('av-ready');
+    list.hidden = false;
+    panels.forEach((p, i) => {
+      p.setAttribute('role', 'tabpanel');
+      p.setAttribute('aria-labelledby', tabs[i].id);
+    });
+    select(0, false);
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i, true));
+      t.addEventListener('keydown', (e) => {
+        const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (!step) return;
+        e.preventDefault();
+        const next = (i + step + tabs.length) % tabs.length;
+        select(next, true);
+        tabs[next].focus();
+      });
+    });
+    // Links such as #led-walls open the right room, then scroll to it.
+    const openFromHash = () => {
+      const i = panels.findIndex((p) => '#' + p.id === location.hash);
+      if (i < 0) return;
+      select(i, false);
+      panels[i].scrollIntoView({ behavior: 'auto', block: 'start' });
+      list.scrollTo({ left: tabs[i].offsetLeft - list.offsetLeft - 24 });
+    };
+    window.addEventListener('hashchange', openFromHash);
+    document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', () => {
+      if (a.hash === location.hash) openFromHash();   // same link twice: no hashchange fires
+    }));
+    openFromHash();
+  }
+
   // User guide: search filters the chapters (and highlights every match where the
   // browser supports the CSS Highlight API), "/" focuses search, and each command
   // block has a copy button.
