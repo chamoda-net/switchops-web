@@ -73,7 +73,7 @@ window.SWITCHOPS_VENDORS = [
     status: 'planned', caption: '', partnerWording: 'Member of NVIDIA Inception' },
 
   // ── Academy ────────────────────────────────────────────────────────────────
-  // SwitchOps Academy was dropped; training now runs on EduZone via traininghub.lk,
+  // SwitchOps Academy was dropped; training now runs on EduZone,
   // so the academy entries stay hidden (kept only for the archived academy page).
   { name: 'Udemy', logo: 'udemy.svg', kind: 'mark', group: 'academy',
     status: 'planned', caption: 'Available on Udemy', partnerWording: 'Available on Udemy' },

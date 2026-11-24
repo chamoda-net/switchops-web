@@ -34,7 +34,7 @@ const INTERESTS      = [
     'Cloud Solutions',
     'Software & Development',
     'SwitchOps AI demo',
-    'IT training (traininghub.lk)',
+    'EduZone (classes and courses)',
     'Something else',
 ];
 define('PRIVATE_DIR', dirname(__DIR__));                       // the folder above public_html

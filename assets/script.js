@@ -436,13 +436,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // traininghub.lk hub (homepage Education): entrance once, then packets
+  // EduZone hub (homepage Education): entrance once, then packets
   // stream and the tagline types through who it's for, only while on screen.
-  const th = document.querySelector('[data-th-hub]');
-  if (th) {
-    const svg = th.querySelector('svg');
-    const word = th.querySelector('.th-word');
-    const WORDS = ['students.', 'working professionals.', 'career changers.', 'everyone willing to learn.'];
+  const ez = document.querySelector('[data-ez-hub]');
+  if (ez) {
+    const svg = ez.querySelector('svg');
+    const word = ez.querySelector('.ez-word');
+    const WORDS = ['Grade 5, O/L and A/L students.', 'working professionals.', 'teachers and institutes.', 'everyone willing to learn.'];
     const FINAL = WORDS[WORDS.length - 1];
     let running = false;
     let cycle = 0;
@@ -496,19 +496,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (reduceMotion) {
       if (svg.pauseAnimations) svg.pauseAnimations();
     } else {
-      th.classList.add('th-armed');
+      ez.classList.add('ez-armed');
       if (svg.pauseAnimations) svg.pauseAnimations();
-      onceVisible(th, () => whenReady(() => th.classList.add('is-in')));
+      onceVisible(ez, () => whenReady(() => ez.classList.add('is-in')));
       if ('IntersectionObserver' in window) {
         new IntersectionObserver((entries) => {
           entries.forEach((e) => (e.isIntersecting ? whenReady(start) : stop()));
-        }, { threshold: 0.25 }).observe(th);
+        }, { threshold: 0.25 }).observe(ez);
         document.addEventListener('visibilitychange', () => {
           if (document.hidden) stop();
-          else if (th.getBoundingClientRect().top < window.innerHeight) whenReady(start);
+          else if (ez.getBoundingClientRect().top < window.innerHeight) whenReady(start);
         });
       } else {
-        th.classList.add('is-in');
+        ez.classList.add('is-in');
         whenReady(start);
       }
     }

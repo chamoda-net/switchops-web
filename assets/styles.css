@@ -831,85 +831,81 @@ section.trust { padding: 42px 0 48px; border-bottom: 1px solid var(--border); }
 .mock-app.bars-armed.is-visible .mock-bar-fill { transform: scaleX(1); }
 
 
-/* -------------------- traininghub.lk hub (homepage Education) -------------------- */
-/* Learners on both sides stream into the traininghub.lk logo while EduZone powers
-   it from below. Packets are SMIL (paused off-screen / under reduced motion by
-   script.js); the entrance only runs once .th-armed is set, so it's visible without JS. */
+/* -------------------- EduZone hub (homepage Education) -------------------- */
+/* Teachers on the left stream into EduZone and out to students on the right. The panel
+   uses EduZone's own colours: its reversed logo belongs on dark green. Packets are SMIL
+   (paused off-screen / under reduced motion by script.js); the entrance only runs once
+   .ez-armed is set, so it's visible without JS. */
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
-.th-panel {
-  position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  font-family: var(--ui); overflow: hidden;
-  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.65), 0 0 60px -30px rgba(68,100,234,0.25);
+.ez-panel {
+  --ez-deep: #06190f; --ez-forest: #0a2a1d; --ez-line: rgba(140,195,165,0.2);
+  --ez-soft: #8cc3a5; --ez-text: #d8ece0; --ez-gold: #d4a03f;
+  position: relative; background: var(--ez-forest); border: 1px solid var(--ez-line); border-radius: var(--radius);
+  font-family: var(--ui); overflow: hidden; box-shadow: 0 30px 80px -20px rgba(0,0,0,0.65);
 }
-.th-head {
+.ez-head {
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
-  padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--surface-2);
+  padding: 12px 16px; border-bottom: 1px solid var(--ez-line); background: var(--ez-deep);
   font-size: 10.5px; letter-spacing: .08em;
 }
-.th-title { display: inline-flex; align-items: center; gap: 9px; color: var(--text); }
-.th-meta { color: var(--text-faint); white-space: nowrap; }
-.th-canvas {
-  padding: 18px 14px 14px;
-  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 16px 16px;
+.ez-title { color: #fbfaf5; }
+.ez-meta { color: var(--ez-soft); white-space: nowrap; }
+.ez-canvas { padding: 10px 14px 6px; }
+.ez-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ez-svg text { font-family: var(--ui); }
+.ez-link { fill: none; stroke: rgba(140,195,165,0.28); stroke-width: 1; }
+.ez-pkt { fill: var(--ez-gold); }
+.ez-node circle { fill: var(--ez-deep); stroke: rgba(140,195,165,0.4); stroke-width: 1; }
+.ez-node use { fill: none; stroke: var(--ez-text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ez-node circle { animation: ez-node-ping 6s ease-in-out infinite; animation-delay: calc(var(--i) * 1s); }
+@keyframes ez-node-ping {
+  0%, 22%, 100% { stroke: rgba(140,195,165,0.4); }
+  8% { stroke: var(--ez-gold); }
 }
-.th-svg { display: block; width: 100%; height: auto; overflow: visible; }
-.th-svg text { font-family: var(--ui); }
-.th-link { fill: none; stroke: #2a2a2a; stroke-width: 1; }
-.th-power { stroke: rgba(68,100,234,0.35); }
-.th-pkt { fill: var(--accent); filter: drop-shadow(0 0 3px var(--accent)); }
-.th-node circle { fill: var(--surface-2); stroke: var(--border-hover); stroke-width: 1; }
-.th-node use { fill: none; stroke: var(--text-dim); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-/* Each learner lights up in turn — someone is always joining. */
-.th-node circle { animation: th-node-ping 6s ease-in-out infinite; animation-delay: calc(var(--i) * 1s); }
-@keyframes th-node-ping {
-  0%, 22%, 100% { stroke: var(--border-hover); }
-  8% { stroke: var(--accent); }
-}
-.th-halo { fill: none; stroke: var(--accent); stroke-width: 1; opacity: .35; animation: th-halo 2.8s ease-in-out infinite; }
-@keyframes th-halo { 0%, 100% { opacity: .2; } 50% { opacity: .65; } }
-.th-logo image { filter: drop-shadow(0 10px 28px rgba(0,0,0,0.6)); }
-.th-label { font-size: 9.5px; letter-spacing: .1em; fill: var(--text-faint); }
-.th-chip rect { fill: var(--surface-2); stroke: var(--accent); stroke-width: 1; }
-.th-chip use { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.th-chip-name { font-size: 14px; font-weight: 600; fill: var(--text); }
-.th-chip-sub { font-size: 8.5px; letter-spacing: .1em; fill: var(--text-faint); }
+.ez-halo { fill: none; stroke: var(--ez-soft); stroke-width: 1; animation: ez-halo 2.8s ease-in-out infinite; }
+@keyframes ez-halo { 0%, 100% { opacity: .18; } 50% { opacity: .42; } }
+.ez-label { font-size: 11px; letter-spacing: .1em; fill: var(--ez-soft); }
+.ez-feats { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ez-line); }
+.ez-feats li { padding: 11px 6px; text-align: center; font-size: 14px; font-weight: 600; line-height: 1.3; color: var(--ez-text); }
+.ez-feats li + li { border-left: 1px solid var(--ez-line); }
 
-/* Entrance: links draw in, learners pop in, the logo settles, EduZone rises. */
-.th-armed .th-link { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1s var(--ease-out); }
-.th-armed .th-power { transition-delay: .55s; }
-.th-armed .th-node, .th-armed .th-logo, .th-armed .th-chip, .th-armed .th-label, .th-armed .th-pkts {
+/* Entrance: links draw in, people pop in, the logo fades in. */
+.ez-armed .ez-link { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1s var(--ease-out); }
+.ez-armed .ez-node, .ez-armed .ez-logo, .ez-armed .ez-label, .ez-armed .ez-pkts {
   opacity: 0; transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
   transform-box: fill-box; transform-origin: center;
 }
-.th-armed .th-node { transform: scale(.6); transition-delay: calc(.35s + var(--i) * 70ms); }
-.th-armed .th-logo { transform: scale(.94); transition-delay: .15s; }
-.th-armed .th-chip { transform: translateY(10px); transition-delay: .5s; }
-.th-armed .th-label { transition-delay: .8s; }
-.th-armed .th-pkts { transition-delay: 1s; }
-.th-armed.is-in .th-link { stroke-dashoffset: 0; }
-.th-armed.is-in .th-node, .th-armed.is-in .th-logo, .th-armed.is-in .th-chip,
-.th-armed.is-in .th-label, .th-armed.is-in .th-pkts { opacity: 1; transform: none; }
+.ez-armed .ez-node { transform: scale(.6); transition-delay: calc(.35s + var(--i) * 70ms); }
+.ez-armed .ez-logo { transition-delay: .15s; }
+.ez-armed .ez-label { transition-delay: .8s; }
+.ez-armed .ez-pkts { transition-delay: 1s; }
+.ez-armed.is-in .ez-link { stroke-dashoffset: 0; }
+.ez-armed.is-in .ez-node, .ez-armed.is-in .ez-logo, .ez-armed.is-in .ez-label, .ez-armed.is-in .ez-pkts { opacity: 1; transform: none; }
 
-.th-foot { padding: 16px 20px 18px; border-top: 1px solid var(--border); background: var(--surface-2); }
-.th-tagline { margin: 0; min-height: 1.5em; font-size: 15px; line-height: 1.5; color: var(--text-dim); }
-.th-word { color: var(--accent-ink); }
-.th-caret {
+.ez-foot { padding: 15px 20px 17px; border-top: 1px solid var(--ez-line); background: var(--ez-deep); }
+.ez-tagline { margin: 0; min-height: 1.5em; font-size: 15px; line-height: 1.5; color: var(--ez-text); }
+.ez-word { color: #ecd08f; }
+.ez-caret {
   display: inline-block; width: 8px; height: 1.05em; margin-left: 3px; vertical-align: -0.15em;
-  background: var(--accent); animation: th-caret 1s steps(1) infinite;
+  background: var(--ez-gold); animation: ez-caret 1s steps(1) infinite;
 }
-@keyframes th-caret { 50% { opacity: 0; } }
+@keyframes ez-caret { 50% { opacity: 0; } }
+.ez-points { margin: 0 0 26px; padding: 0; list-style: none; }
+.ez-points li { position: relative; padding: 5px 0 5px 26px; font-size: 16px; line-height: 1.45; color: var(--text); }
+.ez-points li::before { content: ""; position: absolute; left: 3px; top: 12px; width: 10px; height: 5px; border-left: 2px solid var(--accent-ink); border-bottom: 2px solid var(--accent-ink); transform: rotate(-45deg); }
 @media (max-width: 480px) {
-  .th-meta { display: none; }
-  .th-canvas { padding: 14px 8px 10px; }
-  .th-foot { padding: 14px 16px 16px; }
-  .th-tagline { font-size: 13.5px; }
+  .ez-canvas { padding: 8px 8px 4px; }
+  .ez-feats { grid-template-columns: 1fr 1fr; }
+  .ez-feats li:nth-child(3) { border-left: none; }
+  .ez-feats li:nth-child(n+3) { border-top: 1px solid var(--ez-line); }
+  .ez-foot { padding: 14px 16px 16px; }
+  .ez-tagline { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .th-pkts, .th-caret { display: none; }
+  .ez-pkts, .ez-caret { display: none; }
 }
 
 
@@ -1301,13 +1297,13 @@ h1, h2, h3, h4 { font-family: var(--display) !important; font-weight: 400 !impor
 .logo { font-family: var(--display); font-weight: 400; font-size-adjust: none; }
 .logo .sub { font-family: var(--ui); font-weight: 700; font-size-adjust: 0.55; }
 .hero-stats div strong, .num-big, .video-card .num { font-family: var(--display); font-weight: 400; font-size-adjust: none; }
-.dm-svg .dm-letter, .th-svg .th-chip-name { font-family: var(--display); font-weight: 400; }
+.dm-svg .dm-letter { font-family: var(--display); font-weight: 400; }
 
 /* Labels and eyebrows: Rajdhani Bold. */
 .eyebrow, .trust-label, .tag, .badge, .crumb, label, dt, .card .tag,
-.topo-head, .dm-head, .th-head, .dm-step, .dm-facts dt, .proof strong, .platform-num,
+.topo-head, .dm-head, .ez-head, .dm-step, .dm-facts dt, .proof strong, .platform-num,
 .hero-stats div span, .legal-meta, .legal-meta b, .legal-toc summary, .sec-num, .cl-num,
-.footer-bottom, .form-note, .dm-label, .dm-boundary-label, .dm-core-label, .th-label, .th-chip-sub { font-weight: 700; }
+.footer-bottom, .form-note, .dm-label, .dm-boundary-label, .dm-core-label, .ez-label { font-weight: 700; }
 
 /* Buttons and navigation: Rajdhani Bold. */
 .btn, .nav-link, .m-link, .m-label, .tab-btn, .faq-q, .legal-switch a, .toc-back, .legal-links a,
